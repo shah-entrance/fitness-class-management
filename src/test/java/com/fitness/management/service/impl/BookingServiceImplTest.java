@@ -69,11 +69,11 @@ public class BookingServiceImplTest {
         regularUser = new User("regular_user", "password", UserType.GOLD);
         premiumUser = new User("premium_user", "password", UserType.PLATINUM);
         
-        // Create test fitness classes - using CROSSFIT instead of STRENGTH
+        // Create test fitness classes - using GYM instead of STRENGTH
         LocalDateTime now = LocalDateTime.now();
         yogaClass = new FitnessClass("Yoga", ClassType.YOGA, 10, now.plusHours(1), 60);
-        spinClass = new FitnessClass("Spin", ClassType.CARDIO, 5, now.plusHours(3), 45);
-        boxingClass = new FitnessClass("Boxing", ClassType.CROSSFIT, 8, now.plusHours(2), 50);
+        spinClass = new FitnessClass("Spin", ClassType.YOGA, 5, now.plusHours(3), 45);
+        boxingClass = new FitnessClass("Boxing", ClassType.GYM, 8, now.plusHours(2), 50);
         
         // Save the fitness classes to the repository
         mockFitnessClassRepository.save(yogaClass);
@@ -156,7 +156,7 @@ public class BookingServiceImplTest {
         // Create two classes with overlapping times
         LocalDateTime now = LocalDateTime.now();
         FitnessClass class1 = new FitnessClass("Class1", ClassType.YOGA, 10, now.plusHours(1), 60);
-        FitnessClass class2 = new FitnessClass("Class2", ClassType.CARDIO, 10, now.plusHours(1).plusMinutes(30), 60);
+        FitnessClass class2 = new FitnessClass("Class2", ClassType.YOGA, 10, now.plusHours(1).plusMinutes(30), 60);
         
         mockFitnessClassRepository.save(class1);
         mockFitnessClassRepository.save(class2);
@@ -341,7 +341,7 @@ public class BookingServiceImplTest {
         // Create classes for the test
         LocalDateTime now = LocalDateTime.now();
         FitnessClass class1 = new FitnessClass("Class1", ClassType.YOGA, 10, now.plusHours(1), 60);
-        FitnessClass class2 = new FitnessClass("Class2", ClassType.CARDIO, 10, now.plusHours(2), 60);
+        FitnessClass class2 = new FitnessClass("Class2", ClassType.YOGA, 10, now.plusHours(2), 60);
         FitnessClass class3 = new FitnessClass("Class3", ClassType.DANCE, 10, now.plusHours(3), 60);
         FitnessClass class4 = new FitnessClass("Class4", ClassType.GYM, 10, now.plusHours(4), 60);
         

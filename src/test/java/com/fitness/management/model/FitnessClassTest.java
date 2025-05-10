@@ -29,7 +29,7 @@ public class FitnessClassTest {
         
         // Test all the setters
         fitnessClass.setName("New Name");
-        fitnessClass.setClassType(ClassType.CARDIO);
+        fitnessClass.setClassType(ClassType.YOGA);
         fitnessClass.setCapacity(20);
         fitnessClass.setCurrentAttendance(5);
         LocalDateTime newTime = startTime.plusHours(1);
@@ -39,7 +39,7 @@ public class FitnessClassTest {
         
         // Verify all changes
         assertEquals("New Name", fitnessClass.getName());
-        assertEquals(ClassType.CARDIO, fitnessClass.getClassType());
+        assertEquals(ClassType.YOGA, fitnessClass.getClassType());
         assertEquals(20, fitnessClass.getCapacity());
         assertEquals(5, fitnessClass.getCurrentAttendance());
         assertEquals(newTime, fitnessClass.getStartTime());
@@ -100,16 +100,16 @@ public class FitnessClassTest {
         FitnessClass class2 = new FitnessClass("Class 2", ClassType.DANCE, 10, baseTime.minusMinutes(30), 60);
         
         // Class from 12:30 to 13:30 (overlaps with class1)
-        FitnessClass class3 = new FitnessClass("Class 3", ClassType.CARDIO, 10, baseTime.plusMinutes(30), 60);
+        FitnessClass class3 = new FitnessClass("Class 3", ClassType.YOGA, 10, baseTime.plusMinutes(30), 60);
         
         // Class from 13:00 to 14:00 (starts exactly when class1 ends, no overlap)
-        FitnessClass class4 = new FitnessClass("Class 4", ClassType.CROSSFIT, 10, baseTime.plusMinutes(60), 60);
+        FitnessClass class4 = new FitnessClass("Class 4", ClassType.GYM, 10, baseTime.plusMinutes(60), 60);
         
         // Class from 11:00 to 12:00 (ends exactly when class1 starts, no overlap)
         FitnessClass class5 = new FitnessClass("Class 5", ClassType.GYM, 10, baseTime.minusMinutes(60), 60);
         
         // Class from 10:00 to 11:00 (completely before class1)
-        FitnessClass class6 = new FitnessClass("Class 6", ClassType.PILATES, 10, baseTime.minusMinutes(120), 60);
+        FitnessClass class6 = new FitnessClass("Class 6", ClassType.DANCE, 10, baseTime.minusMinutes(120), 60);
         
         // Verify conflicts
         assertTrue(class1.hasTimeConflict(class2));

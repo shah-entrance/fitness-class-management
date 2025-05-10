@@ -72,13 +72,13 @@ public class BookingCancellationTimeTest {
         upcomingClass = new FitnessClass("Upcoming Class", ClassType.YOGA, 10, now.plusHours(2), 60);
         
         // Class starting in less than 30 minutes (can't be cancelled by regular users) - 15 minutes from now
-        startingSoonClass = new FitnessClass("Starting Soon Class", ClassType.CARDIO, 10, now.plusHours(4), 60);
+        startingSoonClass = new FitnessClass("Starting Soon Class", ClassType.YOGA, 10, now.plusHours(4), 60);
         
         // Class starting in exactly 30 minutes (edge case - can't be cancelled by regular users)
         startingIn30MinClass = new FitnessClass("30min Class", ClassType.DANCE, 10, now.plusHours(6), 60);
         
         // Class starting in 31 minutes (should be cancellable by all users)
-        startingIn31MinClass = new FitnessClass("31min Class", ClassType.CROSSFIT, 10, now.plusHours(8), 60);
+        startingIn31MinClass = new FitnessClass("31min Class", ClassType.GYM, 10, now.plusHours(8), 60);
         
         // Save the fitness classes to the repository
         mockFitnessClassRepository.save(upcomingClass);
@@ -255,7 +255,7 @@ public class BookingCancellationTimeTest {
         LocalDateTime now = LocalDateTime.now();
         
         FitnessClass silverClass = new FitnessClass("Silver Class", ClassType.YOGA, 10, now.plusHours(20), 60);
-        FitnessClass goldClass = new FitnessClass("Gold Class", ClassType.CARDIO, 10, now.plusHours(22), 60);
+        FitnessClass goldClass = new FitnessClass("Gold Class", ClassType.YOGA, 10, now.plusHours(22), 60);
         FitnessClass platinumClass = new FitnessClass("Platinum Class", ClassType.DANCE, 10, now.plusHours(24), 60);
         FitnessClass adminClass = new FitnessClass("Admin Class", ClassType.GYM, 10, now.plusHours(26), 60);
         

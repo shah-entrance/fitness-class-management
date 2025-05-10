@@ -74,7 +74,7 @@ public class AdminServiceImplTest {
         // Create a class
         LocalDateTime futureTime = LocalDateTime.now().plusHours(5);
         FitnessClass fitnessClass = adminService.createClass(
-            "To Cancel", ClassType.PILATES, 8, futureTime, 50);
+            "To Cancel", ClassType.DANCE, 8, futureTime, 50);
         
         // Verify not cancelled initially
         assertFalse(fitnessClass.isCancelled());
@@ -95,7 +95,7 @@ public class AdminServiceImplTest {
         
         FitnessClass class1 = adminService.createClass("Class 1", ClassType.YOGA, 10, futureTime1, 60);
         FitnessClass class2 = adminService.createClass("Class 2", ClassType.DANCE, 15, futureTime2, 45);
-        FitnessClass class3 = adminService.createClass("Class 3", ClassType.CARDIO, 8, futureTime3, 30);
+        FitnessClass class3 = adminService.createClass("Class 3", ClassType.YOGA, 8, futureTime3, 30);
         
         // Cancel one class
         adminService.cancelClass(class2);
@@ -122,7 +122,7 @@ public class AdminServiceImplTest {
         mockFitnessClassRepository.save(pastClass);
         
         FitnessClass activeClass1 = adminService.createClass("Active 1", ClassType.DANCE, 15, futureTime1, 45);
-        FitnessClass activeClass2 = adminService.createClass("Active 2", ClassType.CARDIO, 8, futureTime2, 30);
+        FitnessClass activeClass2 = adminService.createClass("Active 2", ClassType.YOGA, 8, futureTime2, 30);
         
         // Cancel one active class
         adminService.cancelClass(activeClass1);

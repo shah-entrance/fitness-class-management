@@ -44,7 +44,7 @@ public class ValidationUtilsTest {
         FitnessClass validClass = new FitnessClass("Yoga", ClassType.YOGA, 10, futureTime, 60);
         FitnessClass cancelledClass = new FitnessClass("Cancelled", ClassType.DANCE, 10, futureTime, 60);
         cancelledClass.setCancelled(true);
-        FitnessClass pastClass = new FitnessClass("Past", ClassType.CARDIO, 10, LocalDateTime.now().minusHours(1), 60);
+        FitnessClass pastClass = new FitnessClass("Past", ClassType.YOGA, 10, LocalDateTime.now().minusHours(1), 60);
         
         // Valid booking
         assertTrue(ValidationUtils.isValidBooking(validUser, validClass));

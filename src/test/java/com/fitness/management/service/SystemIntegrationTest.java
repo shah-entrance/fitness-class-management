@@ -103,7 +103,7 @@ public class SystemIntegrationTest {
         LocalDateTime baseTime = LocalDateTime.now().plusHours(3);
         FitnessClass class1 = adminService.createClass("Class 1", ClassType.YOGA, 5, baseTime, 60);
         FitnessClass class2 = adminService.createClass("Class 2", ClassType.DANCE, 5, baseTime.plusHours(2), 45);
-        FitnessClass class3 = adminService.createClass("Class 3", ClassType.CARDIO, 5, baseTime.plusHours(4), 30);
+        FitnessClass class3 = adminService.createClass("Class 3", ClassType.YOGA, 5, baseTime.plusHours(4), 30);
         FitnessClass class4 = adminService.createClass("Class 4", ClassType.GYM, 5, baseTime.plusHours(6), 60);
         
         // Book up to the limit
@@ -145,7 +145,7 @@ public class SystemIntegrationTest {
         }
         
         // Create a non-overlapping class
-        FitnessClass nonOverlappingClass = adminService.createClass("Non Overlap", ClassType.CARDIO, 5, baseTime.plusHours(2), 60);
+        FitnessClass nonOverlappingClass = adminService.createClass("Non Overlap", ClassType.YOGA, 5, baseTime.plusHours(2), 60);
         
         // Should be able to book non-overlapping class
         Booking booking = bookingService.bookClass(platinumUser, nonOverlappingClass);
