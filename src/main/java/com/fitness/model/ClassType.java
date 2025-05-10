@@ -3,5 +3,8 @@ package com.fitness.model;
 public enum ClassType {
     YOGA,
     GYM,
-    DANCE
+    DANCE,
+    CARDIO,
+    CROSSFIT,
+    PILATES
 }
