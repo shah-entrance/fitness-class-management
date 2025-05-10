@@ -34,7 +34,6 @@ public class InMemoryWaitlistRepository implements WaitlistRepository {
     
     @Override
     public List<WaitlistEntry> findByFitnessClass(FitnessClass fitnessClass) {
-        // Create a copy of values first to avoid ConcurrentModificationException
         return new ArrayList<>(waitlistEntries.values()).stream()
                 .filter(entry -> entry.getFitnessClass().getId().equals(fitnessClass.getId()))
                 .filter(entry -> !entry.isProcessed())
@@ -44,7 +43,6 @@ public class InMemoryWaitlistRepository implements WaitlistRepository {
     
     @Override
     public Optional<WaitlistEntry> findFirstByFitnessClass(FitnessClass fitnessClass) {
-        // Create a copy of values first to avoid ConcurrentModificationException
         return new ArrayList<>(waitlistEntries.values()).stream()
                 .filter(entry -> entry.getFitnessClass().getId().equals(fitnessClass.getId()))
                 .filter(entry -> !entry.isProcessed())
@@ -53,7 +51,6 @@ public class InMemoryWaitlistRepository implements WaitlistRepository {
     
     @Override
     public Optional<WaitlistEntry> findByUserAndFitnessClass(User user, FitnessClass fitnessClass) {
-        // Create a copy of values first to avoid ConcurrentModificationException
         return new ArrayList<>(waitlistEntries.values()).stream()
                 .filter(entry -> entry.getUser().getId().equals(user.getId()))
                 .filter(entry -> entry.getFitnessClass().getId().equals(fitnessClass.getId()))

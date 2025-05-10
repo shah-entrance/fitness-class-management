@@ -11,7 +11,7 @@ public class FitnessClass {
     private String name;
     private ClassType classType;
     private volatile int capacity;
-    private volatile int currentAttendance; // Made volatile for visibility across threads
+    private volatile int currentAttendance;
     private LocalDateTime startTime;
     private int durationMinutes;
     private boolean cancelled;
@@ -21,7 +21,7 @@ public class FitnessClass {
         this.name = name;
         this.classType = classType;
         this.capacity = capacity;
-        this.currentAttendance = 0; // Initialize to zero
+        this.currentAttendance = 0;
         this.startTime = startTime;
         this.durationMinutes = durationMinutes;
         this.cancelled = false;

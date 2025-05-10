@@ -54,7 +54,6 @@ public class AdminServiceImpl implements AdminService {
     
     @Override
     public void cancelClass(FitnessClass fitnessClass) {
-        // Get lock for this fitness class to ensure thread safety
         Lock lock = ConcurrencyUtils.getLockForFitnessClass(fitnessClass);
         
         try {

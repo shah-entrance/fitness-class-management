@@ -13,7 +13,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 public class InMemoryBookingRepository implements BookingRepository {
-    // Using ConcurrentHashMap for thread safety
     private final Map<String, Booking> bookings = new ConcurrentHashMap<>();
     
     @Override
@@ -29,13 +28,11 @@ public class InMemoryBookingRepository implements BookingRepository {
     
     @Override
     public List<Booking> findAll() {
-        // Create a copy to avoid ConcurrentModificationException
         return new ArrayList<>(bookings.values());
     }
     
     @Override
     public List<Booking> findByUser(User user) {
-        // Create a copy of values first to avoid ConcurrentModificationException
         return new ArrayList<>(bookings.values()).stream()
                 .filter(booking -> booking.getUser().getId().equals(user.getId()))
                 .filter(booking -> !booking.isCancelled())
@@ -44,7 +41,6 @@ public class InMemoryBookingRepository implements BookingRepository {
     
     @Override
     public List<Booking> findByFitnessClass(FitnessClass fitnessClass) {
-        // Create a copy of values first to avoid ConcurrentModificationException
         return new ArrayList<>(bookings.values()).stream()
                 .filter(booking -> booking.getFitnessClass().getId().equals(fitnessClass.getId()))
                 .filter(booking -> !booking.isCancelled())
@@ -53,7 +49,6 @@ public class InMemoryBookingRepository implements BookingRepository {
     
     @Override
     public Optional<Booking> findByUserAndFitnessClass(User user, FitnessClass fitnessClass) {
-        // Create a copy of values first to avoid ConcurrentModificationException
         return new ArrayList<>(bookings.values()).stream()
                 .filter(booking -> booking.getUser().getId().equals(user.getId()))
                 .filter(booking -> booking.getFitnessClass().getId().equals(fitnessClass.getId()))

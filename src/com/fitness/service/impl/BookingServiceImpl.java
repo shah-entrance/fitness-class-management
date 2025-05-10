@@ -44,11 +44,9 @@ public class BookingServiceImpl implements BookingService {
     
     @Override
     public Booking bookClass(User user, FitnessClass fitnessClass) {
-        // Get lock for this fitness class
         Lock lock = ConcurrencyUtils.getLockForFitnessClass(fitnessClass);
         
         try {
-            // Acquire lock to ensure thread safety when modifying this fitness class's bookings
             lock.lock();
             
             // Check if class is cancelled
@@ -81,7 +79,6 @@ public class BookingServiceImpl implements BookingService {
             
             // Check if class is full - using the refreshed class data
             if (refreshedClass.getCurrentAttendance() >= refreshedClass.getCapacity()) {
-                // Instead of throwing an exception, add the user to the waitlist
                 WaitlistEntry waitlistEntry = addToWaitlist(user, refreshedClass);
                 System.out.println("Class is full. User added to waitlist position: " + waitlistEntry.getId());
                 throw new ClassFullException("Class is full: " + refreshedClass.getName() + ". You have been added to the waitlist.");
@@ -100,18 +97,15 @@ public class BookingServiceImpl implements BookingService {
             
             return savedBooking;
         } finally {
-            // Make sure to release the lock even if an exception occurs
             lock.unlock();
         }
     }
     
     @Override
     public void cancelBooking(User user, FitnessClass fitnessClass) {
-        // Get lock for this fitness class
         Lock lock = ConcurrencyUtils.getLockForFitnessClass(fitnessClass);
         
         try {
-            // Acquire lock to ensure thread safety when modifying this fitness class's bookings
             lock.lock();
             
             // Find the user's booking for this class
@@ -143,21 +137,16 @@ public class BookingServiceImpl implements BookingService {
             booking.setCancelled(true);
             bookingRepository.save(booking);
             
-            // Reload fitness class to get the most up-to-date state
             Optional<FitnessClass> refreshedClassOpt = fitnessClassRepository.findById(fitnessClass.getId());
             FitnessClass refreshedClass = refreshedClassOpt.orElse(fitnessClass);
             
-            // Decrement the class attendance count
             refreshedClass.decrementCurrentAttendance();
             fitnessClassRepository.save(refreshedClass);
             
-            // Get the actual booking user (might be different from the cancelling user if admin is cancelling)
             User bookingUser = booking.getUser();
             
-            // Decrement user's active bookings count
             bookingUser.decrementActiveBookings();
             
-            // Check if there's someone on the waitlist who can now book
             Optional<WaitlistEntry> nextInLine = waitlistRepository.findFirstByFitnessClass(refreshedClass);
             if (nextInLine.isPresent()) {
                 WaitlistEntry entry = nextInLine.get();
@@ -165,21 +154,16 @@ public class BookingServiceImpl implements BookingService {
                 waitlistRepository.save(entry);
                 
                 try {
-                    // We're already inside a lock, so we need to unlock before calling bookClass
-                    // which will try to acquire the same lock
                     lock.unlock();
                     bookClass(entry.getUser(), refreshedClass);
                     System.out.println("Successfully booked class for waitlisted user: " + entry.getUser().getUsername());
-                    return; // Early return to avoid unlocking twice
+                    return; 
                 } catch (Exception e) {
-                    // If booking fails for the waitlisted user, just log it
                     System.out.println("Failed to automatically book for waitlisted user: " + e.getMessage());
-                    // Re-acquire the lock since we'll need to release it in the finally block
                     lock.lock();
                 }
             }
         } finally {
-            // Make sure to release the lock if we're still holding it
             if (lock.tryLock()) {
                 lock.unlock();
             } else {

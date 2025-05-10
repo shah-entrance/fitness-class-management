@@ -35,7 +35,6 @@ public class App {
     }
     
     private static void runFitnessClassSystem() {
-        // Initialize services
         AuthService authService = new AuthServiceImpl();
         AdminService adminService = new AdminServiceImpl();
         BookingService bookingService = new BookingServiceImpl();
