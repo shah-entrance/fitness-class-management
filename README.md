@@ -1,18 +1,50 @@
-## Getting Started
+# Fitness Class Management System
 
-Welcome to the VS Code Java world. Here is a guideline to help you get started to write Java code in Visual Studio Code.
+A Java application for managing fitness class bookings, scheduling, and user management with different membership tiers.
 
-## Folder Structure
+## Features
 
-The workspace contains two folders by default, where:
+- **User Management:** Register and login users with different membership tiers (Platinum, Gold, Silver)
+- **Class Management:** Create, schedule, and cancel fitness classes
+- **Booking System:** Book classes with capacity management and waitlisting
+- **Concurrency Support:** Thread-safe implementation for simultaneous booking requests
+- **Multiple Repository Options:** In-memory storage with MySQL implementation placeholder
 
-- `src`: the folder to maintain sources
-- `lib`: the folder to maintain dependencies
+## System Requirements
 
-Meanwhile, the compiled output files will be generated in the `bin` folder by default.
+- Java JDK 8 or higher
+- JUnit for running tests
 
-> If you want to customize the folder structure, open `.vscode/settings.json` and update the related settings there.
+## Project Structure
 
-## Dependency Management
+- `src/` - Source code
+  - `com.fitness.model` - Domain model classes
+  - `com.fitness.service` - Business logic and service implementations
+  - `com.fitness.repository` - Data access layer with repository pattern
+  - `com.fitness.exception` - Custom exceptions
+  - `com.fitness.util` - Utility classes
+- `test/` - Unit and integration tests
+- `lib/` - External dependencies
 
-The `JAVA PROJECTS` view allows you to manage your dependencies. More details can be found [here](https://github.com/microsoft/vscode-java-dependency#manage-dependencies).
+## Running the Application
+
+Compile and run the application using the following commands:
+
+```bash
+# Compile
+javac -d bin -cp "lib/*" $(find src -name "*.java")
+
+# Run
+java -cp "bin:lib/*" com.fitness.App
+```
+
+## Testing
+
+The project includes JUnit tests for all major components. Run the tests from your IDE or using the command line.
+
+## Design Considerations
+
+- Thread safety for concurrent booking operations
+- Factory pattern for repository implementation switching
+- Service-oriented architecture for business logic
+- Extensive validation for all operations
