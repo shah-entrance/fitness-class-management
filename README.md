@@ -35,7 +35,7 @@ Compile and run the application using the following commands:
 javac -d bin -cp "lib/*" $(find src -name "*.java")
 
 # Run
-java -cp "bin:lib/*" com.fitness.App
+java -cp "bin:lib/*" com.fitness.management.App
 ```
 
 ## Testing
