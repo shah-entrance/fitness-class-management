@@ -2,6 +2,7 @@ package com.fitness.management.model;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.Lock;
 
 import com.fitness.management.util.ConcurrencyUtils;
@@ -10,8 +11,8 @@ public class FitnessClass {
     private final String id;
     private String name;
     private ClassType classType;
-    private volatile int capacity;
-    private volatile int currentAttendance;
+    private AtomicInteger capacity;
+    private AtomicInteger currentAttendance;
     private LocalDateTime startTime;
     private int durationMinutes;
     private boolean cancelled;
@@ -20,8 +21,8 @@ public class FitnessClass {
         this.id = UUID.randomUUID().toString();
         this.name = name;
         this.classType = classType;
-        this.capacity = capacity;
-        this.currentAttendance = 0;
+        this.capacity = new AtomicInteger(capacity);
+        this.currentAttendance = new AtomicInteger(0);
         this.startTime = startTime;
         this.durationMinutes = durationMinutes;
         this.cancelled = false;
@@ -48,28 +49,28 @@ public class FitnessClass {
     }
     
     public int getCapacity() {
-        return capacity;
+        return capacity.get();
     }
     
     public void setCapacity(int capacity) {
         Lock lock = ConcurrencyUtils.getLockForFitnessClass(this);
         lock.lock();
         try {
-            this.capacity = capacity;
+            this.capacity.set(capacity);
         } finally {
             lock.unlock();
         }
     }
     
     public int getCurrentAttendance() {
-        return currentAttendance;
+        return currentAttendance.get();
     }
     
     public void setCurrentAttendance(int currentAttendance) {
         Lock lock = ConcurrencyUtils.getLockForFitnessClass(this);
         lock.lock();
         try {
-            this.currentAttendance = currentAttendance;
+            this.currentAttendance.set(currentAttendance);
         } finally {
             lock.unlock();
         }
@@ -79,7 +80,7 @@ public class FitnessClass {
         Lock lock = ConcurrencyUtils.getLockForFitnessClass(this);
         lock.lock();
         try {
-            this.currentAttendance++;
+            this.currentAttendance.incrementAndGet();
         } finally {
             lock.unlock();
         }
@@ -89,8 +90,8 @@ public class FitnessClass {
         Lock lock = ConcurrencyUtils.getLockForFitnessClass(this);
         lock.lock();
         try {
-            if (this.currentAttendance > 0) {
-                this.currentAttendance--;
+            if (this.currentAttendance.get() > 0) {
+                this.currentAttendance.decrementAndGet();
             }
         } finally {
             lock.unlock();
@@ -101,7 +102,7 @@ public class FitnessClass {
         Lock lock = ConcurrencyUtils.getLockForFitnessClass(this);
         lock.lock();
         try {
-            return currentAttendance < capacity;
+            return currentAttendance.get() < capacity.get();
         } finally {
             lock.unlock();
         }

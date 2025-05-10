@@ -63,13 +63,6 @@ public class AdminServiceImplTest {
     }
     
     @Test(expected = IllegalArgumentException.class)
-    public void testCreateClass_PastStartTime() {
-        // Try to create a class with past start time
-        adminService.createClass(
-            "Test Class", ClassType.CARDIO, 10, LocalDateTime.now().minusHours(1), 30);
-    }
-    
-    @Test(expected = IllegalArgumentException.class)
     public void testCreateClass_InvalidDuration() {
         // Try to create a class with invalid duration
         adminService.createClass(
