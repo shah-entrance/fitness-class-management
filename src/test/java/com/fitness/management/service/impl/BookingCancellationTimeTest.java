@@ -4,7 +4,6 @@ import com.fitness.management.model.ClassType;
 import com.fitness.management.model.FitnessClass;
 import com.fitness.management.model.User;
 import com.fitness.management.model.UserType;
-import com.fitness.model.*;
 import com.fitness.management.service.BookingService;
 import com.fitness.management.service.mock.MockBookingRepository;
 import com.fitness.management.service.mock.MockFitnessClassRepository;

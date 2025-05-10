@@ -9,7 +9,6 @@ import com.fitness.management.model.FitnessClass;
 import com.fitness.management.model.User;
 import com.fitness.management.model.UserType;
 import com.fitness.management.model.WaitlistEntry;
-import com.fitness.model.*;
 import com.fitness.management.service.impl.AdminServiceImpl;
 import com.fitness.management.service.impl.AuthServiceImpl;
 import com.fitness.management.service.impl.BookingServiceImpl;

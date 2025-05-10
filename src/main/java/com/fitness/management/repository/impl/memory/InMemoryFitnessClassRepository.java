@@ -31,13 +31,6 @@ public class InMemoryFitnessClassRepository implements FitnessClassRepository {
     }
     
     @Override
-    public List<FitnessClass> findAllActive() {
-        return fitnessClasses.values().stream()
-                .filter(fitnessClass -> !fitnessClass.isCancelled())
-                .collect(Collectors.toList());
-    }
-    
-    @Override
     public List<FitnessClass> findAllActiveAfter(LocalDateTime time) {
         return fitnessClasses.values().stream()
                 .filter(fitnessClass -> !fitnessClass.isCancelled())

@@ -23,12 +23,7 @@ public class MySQLFitnessClassRepository implements FitnessClassRepository {
     public List<FitnessClass> findAll() {
         throw new MySQLNotImplementedException("Finding all fitness classes in MySQL is not implemented yet");
     }
-    
-    @Override
-    public List<FitnessClass> findAllActive() {
-        throw new MySQLNotImplementedException("Finding all active fitness classes in MySQL is not implemented yet");
-    }
-    
+
     @Override
     public List<FitnessClass> findAllActiveAfter(LocalDateTime time) {
         throw new MySQLNotImplementedException("Finding all active fitness classes after time in MySQL is not implemented yet");
