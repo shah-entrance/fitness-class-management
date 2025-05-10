@@ -40,10 +40,6 @@ public class AdminServiceImpl implements AdminService {
             throw new IllegalArgumentException("Capacity must be greater than 0");
         }
         
-        if (startTime.isBefore(LocalDateTime.now())) {
-            throw new IllegalArgumentException("Start time must be in the future");
-        }
-        
         if (durationMinutes <= 0) {
             throw new IllegalArgumentException("Duration must be greater than 0");
         }
