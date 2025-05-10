@@ -2,6 +2,8 @@ package com.fitness.management.util;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public class DateTimeUtils {
     
@@ -24,5 +26,13 @@ public class DateTimeUtils {
     public static boolean isTimeOverlap(LocalDateTime start1, LocalDateTime end1,
                                         LocalDateTime start2, LocalDateTime end2) {
         return start1.isBefore(end2) && start2.isBefore(end1);
+    }
+    
+    public static LocalDateTime getTodayAt(int hour, int minute) {
+        return LocalDate.now().atTime(hour, minute);
+    }
+    
+    public static LocalDateTime getRelativeDayAt(int daysFromToday, int hour, int minute) {
+        return LocalDate.now().plusDays(daysFromToday).atTime(hour, minute);
     }
 }

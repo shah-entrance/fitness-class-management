@@ -17,7 +17,6 @@ import com.fitness.management.exception.TimeConflictException;
 import com.fitness.management.util.DateTimeUtils;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 public class App {
     public static void main(String[] args) {
@@ -49,12 +48,12 @@ public class App {
         
         System.out.println("Users registered successfully!");
         
-        // Create some classes
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-        LocalDateTime yogaTime1 = LocalDateTime.parse("2025-05-09 10:00", formatter);
-        LocalDateTime yogaTime2 = LocalDateTime.parse("2025-05-09 14:00", formatter);
-        LocalDateTime danceTime = LocalDateTime.parse("2025-05-09 16:00", formatter);
-        LocalDateTime gymTime = LocalDateTime.parse("2025-05-10 09:00", formatter);
+        // Create some classes using dynamic dates instead of hard-coded ones
+        // Using today and tomorrow for the class dates
+        LocalDateTime yogaTime1 = DateTimeUtils.getTodayAt(10, 0);  // Today at 10:00
+        LocalDateTime yogaTime2 = DateTimeUtils.getTodayAt(14, 0);  // Today at 14:00
+        LocalDateTime danceTime = DateTimeUtils.getTodayAt(16, 0);  // Today at 16:00
+        LocalDateTime gymTime = DateTimeUtils.getRelativeDayAt(1, 9, 0);  // Tomorrow at 9:00
         
         FitnessClass yogaClass1 = adminService.createClass("Morning Yoga", ClassType.YOGA, 2, yogaTime1, 60);
         FitnessClass yogaClass2 = adminService.createClass("Afternoon Yoga", ClassType.YOGA, 3, yogaTime2, 60);
@@ -132,7 +131,7 @@ public class App {
         // This should exceed the booking limit for Silver tier (3 classes)
         try {
             FitnessClass extraClass = adminService.createClass("Extra Class", ClassType.YOGA, 5, 
-                    LocalDateTime.parse("2025-05-11 10:00", formatter), 60);
+                    DateTimeUtils.getRelativeDayAt(2, 10, 0), 60);  // Two days from now at 10:00
             bookingService.bookClass(user3, extraClass);
             System.out.println("User3 booked extra class");
         } catch (BookingLimitExceededException e) {
