@@ -38,7 +38,7 @@ public class RepositoryFactory {
             case MYSQL:
                 return new MySQLUserRepository();
             default:
-                throw new IllegalArgumentException("Unknown repository type: " + type);
+                throw new UnsupportedOperationException("Unknown repository type: " + type);
         }
     }
     

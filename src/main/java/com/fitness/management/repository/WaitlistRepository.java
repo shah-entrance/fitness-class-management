@@ -9,10 +9,7 @@ import java.util.Optional;
 
 public interface WaitlistRepository {
     WaitlistEntry save(WaitlistEntry waitlistEntry);
-    Optional<WaitlistEntry> findById(String id);
-    List<WaitlistEntry> findAll();
     List<WaitlistEntry> findByFitnessClass(FitnessClass fitnessClass);
     Optional<WaitlistEntry> findFirstByFitnessClass(FitnessClass fitnessClass);
     Optional<WaitlistEntry> findByUserAndFitnessClass(User user, FitnessClass fitnessClass);
-    void delete(String id);
 }

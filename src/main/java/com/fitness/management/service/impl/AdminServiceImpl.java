@@ -80,14 +80,4 @@ public class AdminServiceImpl implements AdminService {
             lock.unlock();
         }
     }
-    
-    @Override
-    public List<FitnessClass> getAllClasses() {
-        return fitnessClassRepository.findAll();
-    }
-    
-    @Override
-    public List<FitnessClass> getActiveClasses() {
-        return fitnessClassRepository.findAllActiveAfter(LocalDateTime.now());
-    }
 }

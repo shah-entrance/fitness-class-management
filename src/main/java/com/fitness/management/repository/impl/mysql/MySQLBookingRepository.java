@@ -16,16 +16,6 @@ public class MySQLBookingRepository implements BookingRepository {
     }
     
     @Override
-    public Optional<Booking> findById(String id) {
-        throw new MySQLNotImplementedException("Finding booking by ID in MySQL is not implemented yet");
-    }
-    
-    @Override
-    public List<Booking> findAll() {
-        throw new MySQLNotImplementedException("Finding all bookings in MySQL is not implemented yet");
-    }
-    
-    @Override
     public List<Booking> findByUser(User user) {
         throw new MySQLNotImplementedException("Finding bookings by user in MySQL is not implemented yet");
     }

@@ -27,24 +27,6 @@ public class MockFitnessClassRepository implements FitnessClassRepository {
                 .filter(fc -> fc.getId().equals(id))
                 .findFirst();
     }
-    
-    @Override
-    public List<FitnessClass> findAll() {
-        return new ArrayList<>(fitnessClasses);
-    }
-    
-    @Override
-    public List<FitnessClass> findAllActiveAfter(LocalDateTime time) {
-        return fitnessClasses.stream()
-                .filter(fitnessClass -> !fitnessClass.isCancelled())
-                .filter(fitnessClass -> fitnessClass.getStartTime().isAfter(time))
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public void delete(String id) {
-        fitnessClasses.removeIf(fc -> fc.getId().equals(id));
-    }
 
     public void clear() {
         fitnessClasses.clear();

@@ -26,18 +26,6 @@ public class MockBookingRepository implements BookingRepository {
     }
 
     @Override
-    public Optional<Booking> findById(String id) {
-        return bookings.stream()
-                .filter(b -> b.getId().equals(id))
-                .findFirst();
-    }
-
-    @Override
-    public List<Booking> findAll() {
-        return new ArrayList<>(bookings);
-    }
-
-    @Override
     public List<Booking> findByUser(User user) {
         return bookings.stream()
                 .filter(b -> b.getUser().getId().equals(user.getId()))

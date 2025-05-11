@@ -17,19 +17,9 @@ public class InMemoryWaitlistRepository implements WaitlistRepository {
     private final Map<String, WaitlistEntry> waitlistEntries = new ConcurrentHashMap<>();
     
     @Override
-    public synchronized WaitlistEntry save(WaitlistEntry waitlistEntry) {
+    public WaitlistEntry save(WaitlistEntry waitlistEntry) {
         waitlistEntries.put(waitlistEntry.getId(), waitlistEntry);
         return waitlistEntry;
-    }
-    
-    @Override
-    public Optional<WaitlistEntry> findById(String id) {
-        return Optional.ofNullable(waitlistEntries.get(id));
-    }
-    
-    @Override
-    public List<WaitlistEntry> findAll() {
-        return new ArrayList<>(waitlistEntries.values());
     }
     
     @Override
@@ -55,10 +45,5 @@ public class InMemoryWaitlistRepository implements WaitlistRepository {
                 .filter(entry -> entry.getUser().getId().equals(user.getId()))
                 .filter(entry -> entry.getFitnessClass().getId().equals(fitnessClass.getId()))
                 .findFirst();
-    }
-    
-    @Override
-    public synchronized void delete(String id) {
-        waitlistEntries.remove(id);
     }
 }

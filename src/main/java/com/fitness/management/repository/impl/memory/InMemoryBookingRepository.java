@@ -16,19 +16,9 @@ public class InMemoryBookingRepository implements BookingRepository {
     private final Map<String, Booking> bookings = new ConcurrentHashMap<>();
     
     @Override
-    public synchronized Booking save(Booking booking) {
+    public Booking save(Booking booking) {
         bookings.put(booking.getId(), booking);
         return booking;
-    }
-    
-    @Override
-    public Optional<Booking> findById(String id) {
-        return Optional.ofNullable(bookings.get(id));
-    }
-    
-    @Override
-    public List<Booking> findAll() {
-        return new ArrayList<>(bookings.values());
     }
     
     @Override
@@ -56,7 +46,7 @@ public class InMemoryBookingRepository implements BookingRepository {
     }
     
     @Override
-    public synchronized void delete(String id) {
+    public void delete(String id) {
         bookings.remove(id);
     }
 }

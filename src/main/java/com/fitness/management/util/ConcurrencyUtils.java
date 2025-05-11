@@ -16,10 +16,6 @@ public class ConcurrencyUtils {
         return fitnessClassLocks.computeIfAbsent(classId, k -> new ReentrantLock());
     }
     
-    public static void clearLocks() {
-        fitnessClassLocks.clear();
-    }
-    
     private ConcurrencyUtils() {
     }
 }

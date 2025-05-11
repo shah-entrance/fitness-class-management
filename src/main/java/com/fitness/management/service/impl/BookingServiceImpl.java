@@ -157,7 +157,6 @@ public class BookingServiceImpl implements BookingService {
                     lock.unlock();
                     bookClass(entry.getUser(), refreshedClass);
                     System.out.println("Successfully booked class for waitlisted user: " + entry.getUser().getUsername());
-                    return; 
                 } catch (Exception e) {
                     System.out.println("Failed to automatically book for waitlisted user: " + e.getMessage());
                     lock.lock();

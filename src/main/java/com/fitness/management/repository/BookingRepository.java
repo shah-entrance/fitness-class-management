@@ -9,8 +9,6 @@ import java.util.Optional;
 
 public interface BookingRepository {
     Booking save(Booking booking);
-    Optional<Booking> findById(String id);
-    List<Booking> findAll();
     List<Booking> findByUser(User user);
     List<Booking> findByFitnessClass(FitnessClass fitnessClass);
     Optional<Booking> findByUserAndFitnessClass(User user, FitnessClass fitnessClass);

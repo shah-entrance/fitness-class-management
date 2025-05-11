@@ -19,24 +19,9 @@ public class InMemoryUserRepository implements UserRepository {
     }
     
     @Override
-    public Optional<User> findById(String id) {
-        return Optional.ofNullable(users.get(id));
-    }
-    
-    @Override
     public Optional<User> findByUsername(String username) {
         return users.values().stream()
                 .filter(user -> user.getUsername().equals(username))
                 .findFirst();
-    }
-    
-    @Override
-    public List<User> findAll() {
-        return new ArrayList<>(users.values());
-    }
-    
-    @Override
-    public void delete(String id) {
-        users.remove(id);
     }
 }

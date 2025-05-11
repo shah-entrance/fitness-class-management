@@ -16,16 +16,6 @@ public class MySQLWaitlistRepository implements WaitlistRepository {
     }
     
     @Override
-    public Optional<WaitlistEntry> findById(String id) {
-        throw new MySQLNotImplementedException("Finding waitlist entry by ID in MySQL is not implemented yet");
-    }
-    
-    @Override
-    public List<WaitlistEntry> findAll() {
-        throw new MySQLNotImplementedException("Finding all waitlist entries in MySQL is not implemented yet");
-    }
-    
-    @Override
     public List<WaitlistEntry> findByFitnessClass(FitnessClass fitnessClass) {
         throw new MySQLNotImplementedException("Finding waitlist entries by fitness class in MySQL is not implemented yet");
     }
@@ -38,10 +28,5 @@ public class MySQLWaitlistRepository implements WaitlistRepository {
     @Override
     public Optional<WaitlistEntry> findByUserAndFitnessClass(User user, FitnessClass fitnessClass) {
         throw new MySQLNotImplementedException("Finding waitlist entry by user and fitness class in MySQL is not implemented yet");
-    }
-    
-    @Override
-    public void delete(String id) {
-        throw new MySQLNotImplementedException("Deleting waitlist entry in MySQL is not implemented yet");
     }
 }

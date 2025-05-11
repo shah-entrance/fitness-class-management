@@ -27,18 +27,6 @@ public class MockWaitlistRepository implements WaitlistRepository {
     }
 
     @Override
-    public Optional<WaitlistEntry> findById(String id) {
-        return waitlistEntries.stream()
-                .filter(e -> e.getId().equals(id))
-                .findFirst();
-    }
-
-    @Override
-    public List<WaitlistEntry> findAll() {
-        return new ArrayList<>(waitlistEntries);
-    }
-
-    @Override
     public List<WaitlistEntry> findByFitnessClass(FitnessClass fitnessClass) {
         return waitlistEntries.stream()
                 .filter(e -> e.getFitnessClass().getId().equals(fitnessClass.getId()))
@@ -63,11 +51,6 @@ public class MockWaitlistRepository implements WaitlistRepository {
                 .filter(e -> !e.isProcessed())
                 .sorted(Comparator.comparing(WaitlistEntry::getEntryTime))
                 .findFirst();
-    }
-
-    @Override
-    public void delete(String id) {
-        waitlistEntries.removeIf(e -> e.getId().equals(id));
     }
 
     public void clear() {

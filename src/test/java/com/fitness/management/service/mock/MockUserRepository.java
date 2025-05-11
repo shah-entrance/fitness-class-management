@@ -20,27 +20,10 @@ public class MockUserRepository implements UserRepository {
     }
 
     @Override
-    public Optional<User> findById(String id) {
-        return users.stream()
-                .filter(u -> u.getId().equals(id))
-                .findFirst();
-    }
-
-    @Override
     public Optional<User> findByUsername(String username) {
         return users.stream()
                 .filter(u -> u.getUsername().equals(username))
                 .findFirst();
-    }
-
-    @Override
-    public List<User> findAll() {
-        return new ArrayList<>(users);
-    }
-    
-    @Override
-    public void delete(String id) {
-        users.removeIf(u -> u.getId().equals(id));
     }
 
     public void clear() {

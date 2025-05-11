@@ -24,22 +24,4 @@ public class InMemoryFitnessClassRepository implements FitnessClassRepository {
     public Optional<FitnessClass> findById(String id) {
         return Optional.ofNullable(fitnessClasses.get(id));
     }
-    
-    @Override
-    public List<FitnessClass> findAll() {
-        return new ArrayList<>(fitnessClasses.values());
-    }
-    
-    @Override
-    public List<FitnessClass> findAllActiveAfter(LocalDateTime time) {
-        return fitnessClasses.values().stream()
-                .filter(fitnessClass -> !fitnessClass.isCancelled())
-                .filter(fitnessClass -> fitnessClass.getStartTime().isAfter(time))
-                .collect(Collectors.toList());
-    }
-    
-    @Override
-    public void delete(String id) {
-        fitnessClasses.remove(id);
-    }
 }
