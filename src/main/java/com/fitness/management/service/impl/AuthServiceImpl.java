@@ -5,6 +5,7 @@ import com.fitness.management.model.UserType;
 import com.fitness.management.repository.RepositoryFactory;
 import com.fitness.management.repository.UserRepository;
 import com.fitness.management.service.AuthService;
+import com.fitness.management.util.ValidationUtils;
 
 import java.util.Optional;
 
@@ -15,13 +16,11 @@ public class AuthServiceImpl implements AuthService {
         this.userRepository = RepositoryFactory.createUserRepository();
     }
     
-    // For testing - allows injecting a mock repository
-    public AuthServiceImpl(UserRepository userRepository) {
-        this.userRepository = userRepository;
-    }
-    
     @Override
     public User registerUser(String username, String password, UserType userType) {
+        ValidationUtils.validateUsername(username);
+        ValidationUtils.validatePassword(password);
+
         // Check if username already exists
         Optional<User> existingUser = userRepository.findByUsername(username);
         if (existingUser.isPresent()) {

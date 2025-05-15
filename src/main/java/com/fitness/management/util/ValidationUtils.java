@@ -10,26 +10,23 @@ public class ValidationUtils {
     private ValidationUtils() {
     }
     
-    public static boolean isValidUsername(String username) {
-        return username != null && !username.trim().isEmpty() && username.length() >= 3;
+    public static void validateUsername(String username) {
+        boolean valid = username != null && !username.trim().isEmpty();
+        if (!valid) {
+            throw new IllegalArgumentException("Invalid username");
+        }
     }
 
-    public static boolean isValidPassword(String password) {
-        return password != null && password.length() >= Constants.PASSWORD_MIN_LENGTH;
+    public static void validatePassword(String password) {
+        boolean valid = password != null && password.length() >= Constants.PASSWORD_MIN_LENGTH;
+        if (!valid) {
+            throw new IllegalArgumentException("Invalid password");
+        }
     }
     
-    public static boolean isValidBooking(User user, FitnessClass fitnessClass) {
-        return user != null && 
-               fitnessClass != null && 
-               !fitnessClass.isCancelled() && 
-               fitnessClass.getStartTime().isAfter(LocalDateTime.now());
-    }
-    
-    public static boolean isValidCapacity(int capacity) {
-        return capacity > 0;
-    }
-    
-    public static boolean isValidDuration(int durationMinutes) {
-        return durationMinutes >= Constants.MIN_BOOKING_TIME_MINUTES;
+    public static void validateCapacity(int capacity) {
+        if (capacity <= 0) {
+            throw new IllegalArgumentException("Capacity must be greater than zero");
+        }
     }
 }

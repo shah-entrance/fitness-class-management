@@ -2,8 +2,6 @@ package com.fitness.management.repository;
 
 import com.fitness.management.model.FitnessClass;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 public interface FitnessClassRepository {

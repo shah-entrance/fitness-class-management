@@ -3,7 +3,6 @@ package com.fitness.management.repository.impl.mysql;
 import com.fitness.management.model.User;
 import com.fitness.management.repository.UserRepository;
 
-import java.util.List;
 import java.util.Optional;
 
 public class MySQLUserRepository implements UserRepository {

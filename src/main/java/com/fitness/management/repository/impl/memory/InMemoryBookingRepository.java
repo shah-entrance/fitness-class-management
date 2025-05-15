@@ -44,9 +44,4 @@ public class InMemoryBookingRepository implements BookingRepository {
                 .filter(booking -> booking.getFitnessClass().getId().equals(fitnessClass.getId()))
                 .findFirst();
     }
-    
-    @Override
-    public void delete(String id) {
-        bookings.remove(id);
-    }
 }

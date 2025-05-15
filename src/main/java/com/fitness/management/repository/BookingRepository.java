@@ -12,5 +12,4 @@ public interface BookingRepository {
     List<Booking> findByUser(User user);
     List<Booking> findByFitnessClass(FitnessClass fitnessClass);
     Optional<Booking> findByUserAndFitnessClass(User user, FitnessClass fitnessClass);
-    void delete(String id);
 }

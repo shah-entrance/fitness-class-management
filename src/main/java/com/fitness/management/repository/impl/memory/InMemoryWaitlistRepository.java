@@ -23,15 +23,6 @@ public class InMemoryWaitlistRepository implements WaitlistRepository {
     }
     
     @Override
-    public List<WaitlistEntry> findByFitnessClass(FitnessClass fitnessClass) {
-        return new ArrayList<>(waitlistEntries.values()).stream()
-                .filter(entry -> entry.getFitnessClass().getId().equals(fitnessClass.getId()))
-                .filter(entry -> !entry.isProcessed())
-                .sorted(Comparator.comparing(WaitlistEntry::getEntryTime))
-                .collect(Collectors.toList());
-    }
-    
-    @Override
     public Optional<WaitlistEntry> findFirstByFitnessClass(FitnessClass fitnessClass) {
         return new ArrayList<>(waitlistEntries.values()).stream()
                 .filter(entry -> entry.getFitnessClass().getId().equals(fitnessClass.getId()))

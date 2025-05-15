@@ -29,9 +29,4 @@ public class MySQLBookingRepository implements BookingRepository {
     public Optional<Booking> findByUserAndFitnessClass(User user, FitnessClass fitnessClass) {
         throw new MySQLNotImplementedException("Finding booking by user and fitness class in MySQL is not implemented yet");
     }
-    
-    @Override
-    public void delete(String id) {
-        throw new MySQLNotImplementedException("Deleting booking in MySQL is not implemented yet");
-    }
 }

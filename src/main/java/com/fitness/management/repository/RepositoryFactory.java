@@ -22,10 +22,6 @@ public class RepositoryFactory {
     public static void setDefaultType(RepositoryType type) {
         defaultType = type;
     }
-
-    public static RepositoryType getDefaultType() {
-        return defaultType;
-    }
     
     public static UserRepository createUserRepository() {
         return createUserRepository(defaultType);

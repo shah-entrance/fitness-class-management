@@ -11,7 +11,5 @@ public interface BookingService {
     Booking bookClass(User user, FitnessClass fitnessClass);
     void cancelBooking(User user, FitnessClass fitnessClass);
     List<Booking> getUserBookings(User user);
-    List<Booking> getClassBookings(FitnessClass fitnessClass);
     WaitlistEntry addToWaitlist(User user, FitnessClass fitnessClass);
-    List<WaitlistEntry> getWaitlist(FitnessClass fitnessClass);
 }

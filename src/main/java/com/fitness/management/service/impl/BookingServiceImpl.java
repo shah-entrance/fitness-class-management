@@ -14,6 +14,7 @@ import com.fitness.management.repository.RepositoryFactory;
 import com.fitness.management.repository.WaitlistRepository;
 import com.fitness.management.service.BookingService;
 import com.fitness.management.util.ConcurrencyUtils;
+import com.fitness.management.util.ValidationUtils;
 
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
@@ -30,16 +31,6 @@ public class BookingServiceImpl implements BookingService {
         this.bookingRepository = RepositoryFactory.createBookingRepository();
         this.waitlistRepository = RepositoryFactory.createWaitlistRepository();
         this.fitnessClassRepository = RepositoryFactory.createFitnessClassRepository();
-    }
-    
-    // For testing - allows injecting mock repositories
-    public BookingServiceImpl(
-            BookingRepository bookingRepository,
-            WaitlistRepository waitlistRepository,
-            FitnessClassRepository fitnessClassRepository) {
-        this.bookingRepository = bookingRepository;
-        this.waitlistRepository = waitlistRepository;
-        this.fitnessClassRepository = fitnessClassRepository;
     }
     
     @Override
@@ -111,7 +102,7 @@ public class BookingServiceImpl implements BookingService {
             // Find the user's booking for this class
             Optional<Booking> bookingOpt = bookingRepository.findByUserAndFitnessClass(user, fitnessClass);
             
-            if (!bookingOpt.isPresent()) {
+            if (bookingOpt.isEmpty()) {
                 throw new IllegalStateException("No booking found for user and class");
             }
             
@@ -163,11 +154,7 @@ public class BookingServiceImpl implements BookingService {
                 }
             }
         } finally {
-            if (lock.tryLock()) {
-                lock.unlock();
-            } else {
-                lock.unlock();
-            }
+            lock.unlock();
         }
     }
     
@@ -177,12 +164,9 @@ public class BookingServiceImpl implements BookingService {
     }
     
     @Override
-    public List<Booking> getClassBookings(FitnessClass fitnessClass) {
-        return bookingRepository.findByFitnessClass(fitnessClass);
-    }
-    
-    @Override
     public WaitlistEntry addToWaitlist(User user, FitnessClass fitnessClass) {
+        ValidationUtils.validateCapacity(fitnessClass.getCapacity());
+
         // Check if class is cancelled
         if (fitnessClass.isCancelled()) {
             throw new IllegalStateException("Cannot add to waitlist for a cancelled class");
@@ -203,10 +187,5 @@ public class BookingServiceImpl implements BookingService {
         // Create and save waitlist entry
         WaitlistEntry entry = new WaitlistEntry(user, fitnessClass);
         return waitlistRepository.save(entry);
-    }
-    
-    @Override
-    public List<WaitlistEntry> getWaitlist(FitnessClass fitnessClass) {
-        return waitlistRepository.findByFitnessClass(fitnessClass);
     }
 }

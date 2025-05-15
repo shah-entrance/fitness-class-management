@@ -16,11 +16,6 @@ public class MySQLWaitlistRepository implements WaitlistRepository {
     }
     
     @Override
-    public List<WaitlistEntry> findByFitnessClass(FitnessClass fitnessClass) {
-        throw new MySQLNotImplementedException("Finding waitlist entries by fitness class in MySQL is not implemented yet");
-    }
-    
-    @Override
     public Optional<WaitlistEntry> findFirstByFitnessClass(FitnessClass fitnessClass) {
         throw new MySQLNotImplementedException("Finding first waitlist entry by fitness class in MySQL is not implemented yet");
     }

@@ -3,8 +3,6 @@ package com.fitness.management.repository.impl.mysql;
 import com.fitness.management.model.FitnessClass;
 import com.fitness.management.repository.FitnessClassRepository;
 
-import java.time.LocalDateTime;
-import java.util.List;
 import java.util.Optional;
 
 public class MySQLFitnessClassRepository implements FitnessClassRepository {

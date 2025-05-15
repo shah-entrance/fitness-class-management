@@ -22,18 +22,6 @@ public class AdminServiceImpl implements AdminService {
         this.bookingRepository = RepositoryFactory.createBookingRepository();
     }
     
-    // For testing - allows injecting mock repositories
-    public AdminServiceImpl(FitnessClassRepository fitnessClassRepository) {
-        this.fitnessClassRepository = fitnessClassRepository;
-        this.bookingRepository = RepositoryFactory.createBookingRepository();
-    }
-    
-    // For testing - allows injecting both mock repositories
-    public AdminServiceImpl(FitnessClassRepository fitnessClassRepository, BookingRepository bookingRepository) {
-        this.fitnessClassRepository = fitnessClassRepository;
-        this.bookingRepository = bookingRepository;
-    }
-    
     @Override
     public FitnessClass createClass(String name, ClassType classType, int capacity, LocalDateTime startTime, int durationMinutes) {
         if (capacity <= 0) {

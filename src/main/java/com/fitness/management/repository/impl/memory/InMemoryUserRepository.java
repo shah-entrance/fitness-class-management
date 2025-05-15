@@ -3,9 +3,7 @@ package com.fitness.management.repository.impl.memory;
 import com.fitness.management.model.User;
 import com.fitness.management.repository.UserRepository;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
 

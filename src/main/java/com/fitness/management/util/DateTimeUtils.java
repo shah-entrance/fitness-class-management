@@ -18,15 +18,6 @@ public class DateTimeUtils {
         return dateTime.format(DEFAULT_FORMATTER);
     }
     
-    public static LocalDateTime parseDateTime(String dateTimeStr) {
-        return LocalDateTime.parse(dateTimeStr, DEFAULT_FORMATTER);
-    }
-
-    public static boolean isTimeOverlap(LocalDateTime start1, LocalDateTime end1,
-                                        LocalDateTime start2, LocalDateTime end2) {
-        return start1.isBefore(end2) && start2.isBefore(end1);
-    }
-    
     public static LocalDateTime getTodayAt(int hour, int minute) {
         return LocalDate.now().atTime(hour, minute);
     }

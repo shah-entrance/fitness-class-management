@@ -3,13 +3,9 @@ package com.fitness.management.repository.impl.memory;
 import com.fitness.management.model.FitnessClass;
 import com.fitness.management.repository.FitnessClassRepository;
 
-import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 public class InMemoryFitnessClassRepository implements FitnessClassRepository {
     private final Map<String, FitnessClass> fitnessClasses = new HashMap<>();
